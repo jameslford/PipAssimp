@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
     name = 'PipAssimp',         # How you named your package folder (MyLib)
     packages = ['PipAssimp'],   # Chose the same as "name"
-    version = '0.1',      # Start with a small number and increase it with every change you make
+    version = '0.101',      # Start with a small number and increase it with every change you make
     license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
     description = 'Conveniece pkg for install assimp/pyassimp from requirements.txt',   # Give a short description about your library
     author = 'James Ford',                   # Type in your name
