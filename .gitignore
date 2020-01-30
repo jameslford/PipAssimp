@@ -29,6 +29,7 @@ MANIFEST
 setup.py
 setup.cfg
 .vscode/
+tests/
 # .vscode/*
 # !.vscode/settings.json
 # !.vscode/tasks.json
