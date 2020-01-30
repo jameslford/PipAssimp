@@ -26,8 +26,15 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-.setup.py
-.setup.cfg
+setup.py
+setup.cfg
+.vscode/
+# .vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
+# *.code-workspace
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
