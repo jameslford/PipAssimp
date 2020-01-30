@@ -1,1 +1,1 @@
-from .pyassimp import *
+from .core import *
