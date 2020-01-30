@@ -5,17 +5,10 @@ This is the main-module of PyAssimp.
 """
 
 import sys
-if sys.version_info < (2,6):
-    raise RuntimeError('pyassimp: need python 2.6 or newer')
+if sys.version_info < (3, 0):
+    raise RuntimeError('PipAssimp needs python3 or higher')
 
-# xrange was renamed range in Python 3 and the original range from Python 2 was removed.
-# To keep compatibility with both Python 2 and 3, xrange is set to range for version 3.0 and up.
-if sys.version_info >= (3,0):
-    xrange = range
-
-
-try: import numpy
-except ImportError: numpy = None
+import numpy
 import logging
 import ctypes
 logger = logging.getLogger("pyassimp")
@@ -28,7 +21,7 @@ from . import helper
 from . import postprocess
 from .errors import AssimpError
 
-class AssimpLib(object):
+class AssimpLib:
     """
     Assimp-Singleton
     """
@@ -48,13 +41,13 @@ def make_tuple(ai_obj, type = None):
             #import pdb;pdb.set_trace()
         else:
             res = [getattr(ai_obj, e[0]) for e in ai_obj._fields_]
-            res = [res[i:i+4] for i in xrange(0,16,4)]
+            res = [res[i:i+4] for i in range(0, 16, 4)]
     elif isinstance(ai_obj, structs.Matrix3x3):
         if numpy:
             res = numpy.array([getattr(ai_obj, e[0]) for e in ai_obj._fields_]).reshape((3,3))
         else:
             res = [getattr(ai_obj, e[0]) for e in ai_obj._fields_]
-            res = [res[i:i+3] for i in xrange(0,9,3)]
+            res = [res[i:i+3] for i in range(0,9,3)]
     else:
         if numpy:
             res = numpy.array([getattr(ai_obj, e[0]) for e in ai_obj._fields_])

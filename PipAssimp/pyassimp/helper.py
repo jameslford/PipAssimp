@@ -187,10 +187,8 @@ def try_load_functions(library_path, dll):
         export = dll.aiExportScene
         export2blob = dll.aiExportSceneToBlob
     except AttributeError:
-        #OK, this is a library, but it doesn't have the functions we need
         return None
 
-    # library found!
     from .structs import Scene, ExportDataBlob
     load.restype = ctypes.POINTER(Scene)
     load_mem.restype = ctypes.POINTER(Scene)
@@ -229,67 +227,3 @@ def hasattr_silent(object, name):
 
 
 
-def search_library():
-    '''
-    Loads the assimp library.
-    Throws exception AssimpError if no library_path is found
-
-    Returns: tuple, (load from filename function,
-                     load from memory function,
-                     export to filename function,
-                     export to blob function,
-                     release function,
-                     dll)
-    '''
-    #this path
-    folder = os.path.dirname(__file__)
-
-    # silence 'DLL not found' message boxes on win
-    try:
-        ctypes.windll.kernel32.SetErrorMode(0x8007)
-    except AttributeError:
-        pass
-
-
-    # candidates = []
-    # test every file
-    # for curfolder in [folder]+additional_dirs:
-    #     if os.path.isdir(curfolder):
-    #         for filename in os.listdir(curfolder):
-    #             # our minimum requirement for candidates is that
-    #             # they should contain 'assimp' somewhere in
-    #             # their name                                  
-    #             if filename.lower().find('assimp')==-1 : 
-    #                 continue
-    #             is_out=1
-    #             for et in ext_whitelist:
-    #               if et in filename.lower():
-    #                 is_out=0
-    #                 break
-    #             if is_out:
-    #               continue
-                
-    #             library_path = os.path.join(curfolder, filename)
-    #             logger.debug('Try ' + library_path)
-    #             try:
-    #                 dll = ctypes.cdll.LoadLibrary(library_path)
-    #             except Exception as e:
-    #                 logger.warning(str(e))
-    #                 # OK, this except is evil. But different OSs will throw different
-    #                 # errors. So just ignore any errors.
-    #                 continue
-    #             # see if the functions we need are in the dll
-    #             loaded = try_load_functions(library_path, dll)
-    #             if loaded: candidates.append(loaded)
-
-    # if not candidates:
-    #     # no library found
-    #     raise AssimpError("assimp library not found")
-    # else:
-    #     # get the newest library_path
-    #     candidates = map(lambda x: (os.lstat(x[0])[-2], x), candidates)
-    #     res = max(candidates, key=operator.itemgetter(0))[1]
-    #     logger.debug('Using assimp library located at ' + res[0])
-
-
-        # return res[1:]
